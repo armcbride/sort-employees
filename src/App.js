@@ -62,7 +62,7 @@ class App extends Component {
         </tr>
       </thead>
       <tbody>
-      {this.state.employees.filter(sort => sort.name.first.toLowerCase()
+      {this.state.employees.filter(sort => sort.email.toLowerCase()
       .includes(this.state.search.toLowerCase())).map((employee, index)=> 
           <Results 
             key = {index}
