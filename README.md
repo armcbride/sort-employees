@@ -1,2 +1,2 @@
-# sort-employees
-React App for sorting and viewing the employees in a company
+## sort-employees
+    A React Application for sorting through an array
