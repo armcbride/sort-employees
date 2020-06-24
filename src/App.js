@@ -4,7 +4,6 @@ import Title from "./components/Title";
 import Results from "./components/Results";
 import SearchBox from "./components/Search";
 import API from "./utils/API";
-import { listenerCount } from "process";
 class App extends Component {
   // Setting this.state.employee to the employees json array
   state = {
