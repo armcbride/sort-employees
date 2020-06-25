@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useReducer } from "react";
 import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
 import Results from "./components/Results";
@@ -15,13 +15,45 @@ class App extends Component {
 
   componentDidMount(){
     API.getEmp()
-    .then(res => this.setState({employees: res.data.results}, ()=> console.log(this.state))).catch(err => console.log(err))
+    .then((res) =>{
+      const employeeData = res.data.results.map((employee)=>({
+        ...employee,
+        thumbnail: employee.picture.thumbnail,
+        name: employee.name.first + ' ' + employee.name.last,
+        phone: employee.phone,
+        email: employee.email,
+      }));
+      console.log(employeeData);
+      this.setState({employees: employeeData}, ()=> console.log(this.state))
+    })
+    .catch(err => console.log(err))
   };
     
 
-  // handleSort(){
-  //   list.sort(())
-  // }
+  NameSortAsc(){
+    this.setState({
+      employees: this.state.employees.sort((a,b)=> (a.name > b.name ? 1: -1))
+    });
+  };
+
+  NameSortDesc(){
+    this.setState({
+      employees: this.state.employees.sort((a,b)=> (a.name < b.name ? 1: -1))
+    });
+  };
+  
+
+  PhoneSort(){
+    this.setState({
+      employees: this.state.employees.sort((a,b)=> (a.phone > b.phone ? 1: -1))
+    });
+  };
+
+  EmailSort(){
+    this.setState({
+      employees: this.state.employees.sort((a,b)=> (a.email > b.email ? 1: -1))
+    });
+  };
 
   handleInputChange = event => {
     let name = event.target.name;
@@ -38,36 +70,54 @@ class App extends Component {
       <Wrapper>
         <Title>Employees</Title>
        
-        <div className="table">
+        <div align= "center" className="table">
         <SearchBox 
           handleInputChange = {this.handleInputChange}
           search = {this.state.search}
         />
-        <table> 
+        <table align="center"> 
         
         <thead>
         <tr>
           <th>
         <strong>Image</strong>
         </th>
+
         <th>
-        <strong>Name</strong>
+          <strong>
+          Name
+          </strong>
         </th>
         <th>
-        <strong>Phone</strong>
+        <strong onClick={() => {this.PhoneSort();}}>Phone</strong>
         </th>
         <th>
-        <strong>Email</strong>
+        <strong onClick={() => {this.EmailSort();}}>Email</strong>
+        </th>
+        <th>
+        ascend<input type="radio" aria-label="Radio button for alphabetical order" onClick={() => {this.NameSortAsc();}}/> ||
+        descend<input type="radio" aria-label="Radio button for reverse alphabetical order" onClick={() => {this.NameSortDesc();}}/>
         </th>
         </tr>
       </thead>
       <tbody>
-      {this.state.employees.filter(sort => sort.email.toLowerCase()
-      .includes(this.state.search.toLowerCase())).map((employee, index)=> 
+      {this.state.employees.filter(
+        (employee) => 
+        employee.name
+        .toLowerCase()
+        .includes(this.state.search.toLowerCase()) ||
+        employee.phone
+        .toLowerCase()
+        .includes(this.state.search.toLowerCase()) ||
+        employee.email
+        .toLowerCase()
+        .includes(this.state.search.toLowerCase())
+    )
+        .map((employee, index)=> 
           <Results 
             key = {index}
             image = {employee.picture.thumbnail} 
-            name = {employee.name.first + ' ' + employee.name.last}
+            name = {employee.name}
             phone = {employee.phone}
             email = {employee.email}
           />)}
