@@ -17,6 +17,7 @@ class App extends Component {
     API.getEmp()
     .then(res => this.setState({employees: res.data.results}, ()=> console.log(this.state))).catch(err => console.log(err))
   };
+    
 
   // handleSort(){
   //   list.sort(())
@@ -47,10 +48,10 @@ class App extends Component {
         <thead>
         <tr>
           <th>
-        <strong>First name</strong>
+        <strong>Image</strong>
         </th>
         <th>
-        <strong>Last name</strong>
+        <strong>Name</strong>
         </th>
         <th>
         <strong>Phone</strong>
@@ -65,8 +66,8 @@ class App extends Component {
       .includes(this.state.search.toLowerCase())).map((employee, index)=> 
           <Results 
             key = {index}
-            first = {employee.name.first} 
-            last = {employee.name.last}
+            image = {employee.picture.thumbnail} 
+            name = {employee.name.first + ' ' + employee.name.last}
             phone = {employee.phone}
             email = {employee.email}
           />)}
