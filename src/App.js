@@ -1,4 +1,4 @@
-import React, { Component, useReducer } from "react";
+import React, { Component } from "react";
 import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
 import Results from "./components/Results";
