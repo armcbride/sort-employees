@@ -1,3 +1,10 @@
-.ascending {
-    background-image: "./utils/images/arrow-down-circle.svg";
+table {
+    background-color: #bb6898;
+    border: 6px solid #e58c7a;
+    box-shadow: 10px 10px 5px #bb6898;
+    color: #f2dc59;
+}
+
+tr {
+    border: 6px solid #e58c7a;
 }

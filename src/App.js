@@ -4,6 +4,7 @@ import Title from "./components/Title";
 import Results from "./components/Results";
 import SearchBox from "./components/Search";
 import API from "./utils/API";
+import "./App.css"
 class App extends Component {
   // Setting this.state.employee to the employees json array
   state = {
@@ -70,7 +71,7 @@ class App extends Component {
       <Wrapper>
         <Title>Employees</Title>
        
-        <div align= "center" className="table">
+        <div align= "center" className="table" class="table">
         <SearchBox 
           handleInputChange = {this.handleInputChange}
           search = {this.state.search}
@@ -92,11 +93,9 @@ class App extends Component {
         <strong onClick={() => {this.PhoneSort();}}>Phone</strong>
         </th>
         <th>
-        <strong onClick={() => {this.EmailSort();}}>Email</strong>
-        </th>
-        <th>
-        ascend<input type="radio" aria-label="Radio button for alphabetical order" onClick={() => {this.NameSortAsc();}}/> ||
-        descend<input type="radio" aria-label="Radio button for reverse alphabetical order" onClick={() => {this.NameSortDesc();}}/>
+        <strong onClick={() => {this.EmailSort();}}>Email</strong>      ||
+        ascend <input type="radio" aria-label="Radio button for alphabetical order" onClick={() => {this.NameSortAsc();}}/> ||
+        descend <input type="radio" aria-label="Radio button for reverse alphabetical order" onClick={() => {this.NameSortDesc();}}/> ||
         </th>
         </tr>
       </thead>
